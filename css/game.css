@@ -1,0 +1,1126 @@
+
+/* Advanced Theming with CSS Variables */
+:root {
+    --primary-color: #4e6bff;
+    --primary-dark: #3b56e0;
+    --primary-light: #7c90ff;
+    --accent-color: #9966FF;
+    --success-color: #8AC926;
+    --danger-color: #FF595E;
+    --warning-color: #FFCA3A;
+    --text-primary: #2c3e50;
+    --text-secondary: #5a6d87;
+    --text-light: #e1e8ed;
+    --bg-primary: #f0f5ff;
+    --bg-secondary: #e0eafc;
+    --bg-card: #ffffff;
+    --border-color: #e1e8ed;
+    --shadow-sm: 0 8px 30px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 15px 50px rgba(0, 0, 0, 0.18);
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 20px;
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --anim-duration: 0.3s;
+    --winner-gradient: linear-gradient(145deg, #ffd700, #ffcc00);
+  }
+
+  [data-theme="dark"] {
+    --primary-color: #5d76ff;
+    --primary-dark: #4e6bff;
+    --primary-light: #8a9dff;
+    --bg-primary: #1a1c2d;
+    --bg-secondary: #121420;
+    --bg-card: #242738;
+    --text-primary: #e1e8ed;
+    --text-secondary: #a9b4c8;
+    --border-color: #3a3f53;
+    --shadow-sm: 0 8px 30px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 15px 50px rgba(0, 0, 0, 0.3);
+    --winner-gradient: linear-gradient(145deg, #ffea80, #ffd700);
+  }
+
+  /* Base styles with improved typography */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-primary);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    padding: 30px;
+    background-image: linear-gradient(to bottom right, var(--bg-primary), var(--bg-secondary));
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color var(--anim-duration) ease, color var(--anim-duration) ease;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .column {
+    flex: 1;
+    min-width: 300px;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--anim-duration) ease, box-shadow var(--anim-duration) ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+  }
+
+  .column:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+
+  h2 {
+    color: var(--text-primary);
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+  }
+
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+  }
+
+  /* Enhanced Form Styles */
+  form {
+    display: flex;
+    margin-bottom: 25px;
+    gap: 12px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  }
+
+  input {
+    flex: 1;
+    min-width: 150px; /* Prevent input from becoming too small */
+    padding: 14px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    transition: all var(--anim-duration);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+  }
+
+  input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+  }
+
+  input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 2px 15px rgba(78, 107, 255, 0.15);
+  }
+
+  button {
+    padding: 12px 18px;
+    background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--anim-duration);
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(78, 107, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent buttons shrinking excessively */
+  }
+
+   /* Ensure form buttons grow and handle wrapping better */
+   form button {
+      flex-grow: 1; /* Allow buttons to grow */
+      min-width: 80px; /* Minimum width for buttons */
+  }
+   #import-users-btn {
+     margin-left: 0; /* Reset margin */
+   }
+
+
+  button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity var(--anim-duration);
+  }
+
+  button:hover {
+    background: linear-gradient(145deg, var(--primary-dark), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(78, 107, 255, 0.4);
+  }
+
+  button:hover::after {
+    opacity: 1;
+  }
+
+  button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(78, 107, 255, 0.4);
+  }
+
+  button:disabled {
+    background: linear-gradient(145deg, #b0b0b0, #d0d0d0);
+    transform: none;
+    cursor: not-allowed;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Glass Morphism for Lists */
+  ul, #user-checkbox-list {
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--bg-secondary); /* Adjusted scrollbar colors */
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.03);
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  [data-theme="dark"] ul, [data-theme="dark"] #user-checkbox-list {
+     scrollbar-color: var(--primary-color) var(--bg-secondary);
+  }
+
+  /* Custom scrollbar for WebKit browsers */
+  ul::-webkit-scrollbar, #user-checkbox-list::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ul::-webkit-scrollbar-track, #user-checkbox-list::-webkit-scrollbar-track {
+    background: var(--bg-secondary); /* Adjusted track */
+    border-radius: 10px;
+  }
+
+  ul::-webkit-scrollbar-thumb, #user-checkbox-list::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+  }
+
+  ul::-webkit-scrollbar-thumb:hover, #user-checkbox-list::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+  }
+
+  li {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all var(--anim-duration);
+    border-radius: 6px;
+    margin-bottom: 4px;
+    flex-wrap: wrap; /* Allow wrapping for long names/buttons */
+    gap: 10px; /* Add gap between elements when wrapping */
+  }
+
+  li:hover {
+    background-color: rgba(78, 107, 255, 0.05);
+    transform: translateX(3px);
+  }
+
+  li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  li > span { /* Target the name span */
+    flex-grow: 1;
+    word-break: break-all;
+    margin-right: 10px;
+    min-width: 100px; /* Ensure name span has some width */
+  }
+
+   li > div { /* Target the controls div */
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     flex-shrink: 0; /* Prevent controls from shrinking excessively */
+   }
+
+
+  .delete-btn {
+    background: linear-gradient(145deg, var(--danger-color), #e63434);
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(255, 78, 78, 0.3);
+    color: white; /* Ensure text is visible */
+    min-width: 70px; /* Minimum width */
+  }
+
+  .delete-btn:hover {
+    background: linear-gradient(145deg, #e63434, #d42e2e);
+    box-shadow: 0 4px 12px rgba(255, 78, 78, 0.4);
+  }
+
+  /* Advanced Wheel Styles */
+  .wheel-container {
+    position: relative;
+    margin: 0 auto 25px;
+    width: 350px;
+    height: 350px;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+    transition: transform 0.5s ease;
+  }
+
+  .wheel-container:hover {
+    transform: scale(1.02);
+  }
+
+  #wheel-canvas {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure canvas scales down */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .pointer {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: var(--text-primary);
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    z-index: 10;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+  }
+
+  .pointer:hover {
+    transform: translateX(-50%) scale(1.1);
+  }
+
+  /* Enhanced Winner Display */
+  .winner-announcement {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    min-height: 60px;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .winner-highlight {
+    background: var(--winner-gradient);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    animation: winner-pulse 1.5s infinite;
+    color: #333;
+    font-size: 1.5rem;
+  }
+
+  @keyframes winner-pulse {
+    0% {
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+      transform: scale(1.03);
+    }
+    100% {
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+      transform: scale(1);
+    }
+  }
+
+  /* Enhanced Stats Section */
+  .stats {
+    margin-bottom: 20px;
+    text-align: right;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px; /* Add gap between stats if needed */
+    flex-wrap: wrap; /* Allow wrapping */
+  }
+
+  .stats span {
+    padding: 5px 10px;
+    background-color: rgba(78, 107, 255, 0.1);
+    border-radius: 20px;
+    transition: all var(--anim-duration);
+    white-space: nowrap; /* Prevent stat text from breaking */
+  }
+
+  .stats span:hover {
+    background-color: rgba(78, 107, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Enhanced Checkbox List */
+  #user-checkbox-list {
+    max-height: 200px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--anim-duration);
+    border-radius: 6px;
+    margin-bottom: 4px;
+    gap: 12px; /* Gap between checkbox and label */
+  }
+
+  .checkbox-item:hover {
+    background-color: rgba(78, 107, 255, 0.05);
+    transform: translateX(3px);
+  }
+
+  .checkbox-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+    flex-shrink: 0; /* Prevent checkbox shrinking */
+  }
+
+  .checkbox-item label {
+    /* margin-left: 12px; Remove fixed margin */
+    flex: 1; /* Allow label to grow */
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-primary);
+    word-break: break-all; /* Break long labels */
+  }
+
+  /* Enhanced Selection Buttons */
+  .selection-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow wrapping */
+  }
+
+  .selection-buttons button {
+    flex: 1; /* Buttons share space */
+    min-width: 120px; /* Minimum width before wrapping */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .selection-buttons button:first-child {
+    background: linear-gradient(145deg, var(--success-color), #78b122);
+  }
+
+  .selection-buttons button:first-child:hover {
+    background: linear-gradient(145deg, #78b122, var(--success-color));
+  }
+
+  .selection-buttons button:last-child {
+    background: linear-gradient(145deg, var(--warning-color), #e6b800);
+  }
+
+  .selection-buttons button:last-child:hover {
+    background: linear-gradient(145deg, #e6b800, var(--warning-color));
+  }
+
+  /* Enhanced History section with timeline styling */
+  .history-title {
+    margin-top: 30px;
+  }
+
+  #history-list {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    position: relative;
+    padding: 12px 0; /* Remove default UL padding, handled by li */
+  }
+
+   #history-list li {
+      padding: 6px 14px 6px 25px; /* Adjusted padding for dot */
+      margin-bottom: 8px;
+      position: relative;
+      border-bottom: none; /* Remove list item border */
+      align-items: flex-start; /* Align multi-line text better */
+      display: block; /* Ensure list item takes full width */
+      word-break: break-word;
+   }
+
+
+  #history-list li:before {
+    content: '';
+    position: absolute;
+    left: 8px; /* Adjusted position */
+    top: 11px; /* Adjusted vertical position */
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  #history-list li:not(:last-child):after {
+    content: '';
+    position: absolute;
+    left: 12px; /* Adjusted position */
+    top: 13px; /* Adjusted position */
+    bottom: -6px; /* Connect lines between items */
+    width: 2px;
+    background-color: var(--border-color);
+  }
+
+   /* Handle empty message */
+   #history-list li.empty-list-message::before,
+   #history-list li.empty-list-message::after {
+     display: none; /* Hide timeline decorations for empty message */
+   }
+   #history-list li.empty-list-message {
+     padding-left: 14px; /* Reset padding for empty message */
+   }
+
+  #timer-display {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: rgba(78, 107, 255, 0.1);
+    transition: all var(--anim-duration);
+  }
+
+  #timer-display:hover {
+    background-color: rgba(78, 107, 255, 0.2);
+  }
+
+  /* Enhanced Empty list message */
+  .empty-list-message {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 25px 0;
+    font-style: italic;
+    opacity: 0.7;
+  }
+   /* Specific styling for empty message within list context */
+   ul .empty-list-message, #user-checkbox-list .empty-list-message {
+       border-bottom: none;
+       display: block; /* Ensure it takes space */
+       justify-content: center;
+       width: 100%;
+   }
+   ul .empty-list-message:hover, #user-checkbox-list .empty-list-message:hover {
+       background-color: transparent;
+       transform: none;
+   }
+
+  /* Advanced Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  li:not(.empty-list-message), .checkbox-item {
+     animation: slideIn 0.3s ease forwards; /* Apply animation */
+     opacity: 0; /* Start hidden for animation */
+  }
+   /* Apply staggered animation delay (optional but nice) */
+   li:not(.empty-list-message):nth-child(1), .checkbox-item:nth-child(1) { animation-delay: 0.05s; }
+   li:not(.empty-list-message):nth-child(2), .checkbox-item:nth-child(2) { animation-delay: 0.1s; }
+   li:not(.empty-list-message):nth-child(3), .checkbox-item:nth-child(3) { animation-delay: 0.15s; }
+   /* ... add more if needed for many initial items */
+
+  /* Button ripple effect (simplified) */
+  button {
+      position: relative;
+      overflow: hidden;
+  }
+  /* Ripple effect was causing layout issues, removed complex implementation */
+  /* You could add a simple background change on :active instead */
+  button:active {
+       background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1));
+  }
+
+
+  /* Weight Control Styling */
+  .weight-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* margin-right: 10px; Provided by parent gap */
+    padding: 2px 5px;
+    border-radius: 4px;
+    background-color: rgba(78, 107, 255, 0.1);
+    transition: all var(--anim-duration);
+  }
+
+  .weight-control:hover {
+    background-color: rgba(78, 107, 255, 0.2);
+  }
+
+  .weight-btn {
+    width: 22px !important; /* Override general button padding/size */
+    height: 22px !important;
+    padding: 0 !important;
+    display: flex !important; /* Ensure flex properties */
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    border-radius: 4px !important;
+    min-width: 22px !important; /* Ensure it stays square */
+    line-height: 1; /* Prevent line height issues */
+    background: var(--primary-light); /* Lighter background */
+    color: var(--primary-dark); /* Darker text */
+    box-shadow: none; /* Remove general button shadow */
+  }
+  .weight-btn:hover {
+    background: var(--primary-color); /* Standard color on hover */
+    color: white;
+    transform: none; /* Disable hover transform */
+    box-shadow: none;
+  }
+  .weight-btn:active {
+      background: var(--primary-dark);
+      transform: translateY(1px); /* Simple active state */
+  }
+
+
+  .weight-display {
+    font-weight: 500;
+    color: var(--primary-color);
+    min-width: 30px;
+    text-align: center;
+    font-size: 0.9rem; /* Slightly smaller weight display */
+  }
+
+  /* Import Modal Styling */
+  #import-modal {
+    display: none; /* Start hidden */
+    position: fixed;
+    z-index: 1001; /* Above theme toggle */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6); /* Darker backdrop */
+    align-items: center;
+    justify-content: center;
+    display: flex; /* Needs JS to toggle */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0; /* Start faded out */
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Disable interaction when hidden */
+  }
+  #import-modal.visible { /* Class to show modal */
+     opacity: 1;
+     pointer-events: auto;
+  }
+
+  #import-modal > div {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    padding: 25px;
+    border-radius: var(--border-radius-md);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--shadow-lg); /* Larger shadow */
+    position: relative;
+    transform: translateY(20px) scale(0.95); /* Start scaled down */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+  #import-modal.visible > div {
+     transform: translateY(0) scale(1);
+     opacity: 1;
+  }
+
+
+  #bulk-import-text {
+    background-color: var(--bg-secondary); /* Slightly different background */
+    color: var(--text-primary);
+    border-color: var(--border-color);
+    transition: all var(--anim-duration);
+    resize: vertical;
+    width: 100%; height: 150px; padding: 14px; margin-bottom: 20px;
+    border-radius: var(--border-radius-sm); font-size: 1rem;
+  }
+
+  #bulk-import-text:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 2px 15px rgba(78, 107, 255, 0.15);
+    background-color: var(--bg-card); /* Match input focus */
+  }
+  #import-modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+  }
+
+  #cancel-import-btn {
+    background: var(--bg-secondary); /* Secondary background */
+    color: var(--text-primary);
+    padding: 10px 18px;
+    border-radius: var(--border-radius-sm); border: none; cursor: pointer; font-weight: 500;
+  }
+  #cancel-import-btn:hover {
+      background: var(--border-color);
+      transform: translateY(-1px);
+  }
+
+
+  #confirm-import-btn {
+    padding: 10px 18px;
+    border-radius: var(--border-radius-sm); border: none; color: white; cursor: pointer; font-weight: 500;
+    background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
+  }
+   #confirm-import-btn:hover {
+      background: linear-gradient(145deg, var(--primary-dark), var(--primary-color));
+   }
+
+  /* Confetti Animation Enhancement */
+  /* CSS for individual confetti piece is applied inline via JS */
+  @keyframes confetti-fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; } /* Start slightly above */
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+  .confetti { /* Basic class applied by JS */
+       animation: confetti-fall linear forwards; /* Apply animation */
+       position: fixed;
+       z-index: 2000;
+       pointer-events: none;
+       will-change: transform, opacity; /* Optimize animation */
+  }
+
+  /* Theme Toggle Button */
+  #theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all var(--anim-duration);
+    border: none; /* Override default button border */
+  }
+
+  #theme-toggle:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  #theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Added transitions */
+  }
+
+  /* Theme Toggle Animation */
+  .sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  .moon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0); /* Start hidden and rotated */
+    position: absolute; /* Overlay icons */
+  }
+
+  [data-theme="dark"] .sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0); /* Rotate out */
+  }
+
+  [data-theme="dark"] .moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1); /* Rotate in */
+  }
+
+
+  /* Custom tooltip styles */
+  [data-tooltip] {
+    position: relative;
+  }
+
+  [data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px); /* More space */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    background-color: var(--text-primary);
+    color: var(--bg-card);
+    padding: 6px 12px; /* Slightly larger */
+    border-radius: var(--border-radius-sm);
+    font-size: 0.85rem; /* Slightly larger font */
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 1010; /* Above theme toggle hover */
+    opacity: 0;
+    pointer-events: none; /* Prevent tooltip from interfering */
+    animation: tooltip-fade-in 0.3s ease forwards 0.2s; /* Use keyframe */
+  }
+
+   @keyframes tooltip-fade-in {
+     from { opacity: 0; transform: translateX(-50%) translateY(5px); } /* Fade in and move up */
+     to { opacity: 1; transform: translateX(-50%) translateY(0); }
+   }
+
+
+  /* Animated action buttons */
+  .action-btn { /* Applies to buttons with this class */
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0); /* Promote to composite layer */
+    will-change: transform, box-shadow;
+  }
+  .action-btn:hover {
+      /* Keep existing hover effect */
+  }
+
+
+  /* Shine effect removed - was potentially distracting */
+  /* .action-btn:before { ... } */
+  /* @keyframes btn-shine { ... } */
+
+
+  /* Responsive adjustments */
+  @media (max-width: 992px) { /* Adjust breakpoint for 3 columns */
+       .container {
+           max-width: 90%;
+       }
+       .column {
+           min-width: calc(50% - 15px); /* Aim for 2 columns */
+       }
+       /* Target the third column specifically if layout breaks */
+       .column:last-child {
+            min-width: 100%; /* Force last column to full width if needed */
+            /* Or adjust flex properties of container/columns */
+       }
+       .wheel-container {
+            width: 300px;
+            height: 300px;
+       }
+  }
+
+
+  @media (max-width: 768px) {
+    body {
+      padding: 20px; /* Slightly more padding */
+    }
+
+    .container {
+      flex-direction: column;
+      gap: 25px; /* Consistent gap */
+      max-width: 100%; /* Full width */
+    }
+
+    .column {
+      min-width: 100%; /* Ensure columns stack */
+      padding: 20px;
+      box-shadow: var(--shadow-sm); /* Less intense shadow on mobile */
+    }
+     .column:hover {
+        transform: none; /* Disable hover transform on mobile */
+        box-shadow: var(--shadow-sm);
+     }
+
+    .wheel-container {
+      width: 280px;
+      height: 280px;
+      margin-bottom: 20px;
+    }
+     /* Canvas does not need explicit W/H here due to parent and max-width: 100% */
+
+    h2 {
+      font-size: 1.6rem; /* Adjust heading size */
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+    }
+     h2::after {
+         width: 50px;
+     }
+
+    .winner-announcement {
+      font-size: 1.2rem;
+      min-height: 55px; /* Adjust height */
+      padding: 12px;
+    }
+    .winner-highlight {
+      font-size: 1.3rem;
+    }
+
+    /* Adjust form layout */
+     form {
+         gap: 10px;
+     }
+     form input {
+         min-width: calc(100% - 110px); /* Allow button space */
+     }
+     form button {
+         min-width: 90px;
+     }
+
+    .selection-buttons {
+      /* Keep flex for button sizing, allow wrap is good */
+      gap: 10px;
+    }
+
+    #theme-toggle {
+      bottom: 15px;
+      right: 15px;
+      width: 45px;
+      height: 45px;
+    }
+     #theme-toggle svg {
+         width: 22px; height: 22px;
+     }
+     li > div {
+         width: auto; /* Allow controls div to size naturally */
+         justify-content: flex-end; /* Align to the end */
+     }
+  }
+
+   @media (max-width: 480px) {
+      body {
+          padding: 15px;
+      }
+       .column {
+           padding: 15px;
+       }
+       h2 { font-size: 1.4rem; margin-bottom: 15px; padding-bottom: 10px; }
+       input, button { font-size: 0.95rem; padding: 12px 15px;} /* Smaller form elements */
+       button { min-width: 70px; }
+       form button { padding: 12px 15px;}
+
+       .wheel-container {
+          width: 240px; /* Even smaller wheel */
+          height: 240px;
+       }
+
+       .winner-announcement { font-size: 1.1rem; min-height: 50px; }
+       .winner-highlight { font-size: 1.2rem; }
+
+        li {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px; /* Smaller gap when stacked */
+        }
+        li > span { margin-right: 0; } /* Remove right margin on name */
+        li > div {
+            margin-top: 5px; /* Space between name and controls */
+            width: 100%; /* Make controls take full width */
+            justify-content: space-between; /* Space out weight/delete */
+        }
+
+        .weight-control {
+          /* Keep current style, but it takes width from parent div now */
+           padding: 2px 0; /* Adjust padding slightly */
+        }
+         /* Make weight buttons slightly easier to tap */
+         .weight-btn { width: 26px !important; height: 26px !important; min-width: 26px !important; font-size: 16px !important;}
+         .weight-display { min-width: 35px; }
+
+        .delete-btn {
+             padding: 7px 14px; /* Slightly larger delete button */
+             min-width: 80px;
+        }
+
+       .selection-buttons button { min-width: 100px; }
+   }
+
+
+  /* Print Styles */
+  @media print {
+    body {
+      background: white !important; /* Override gradients */
+      color: black;
+      padding: 0.5cm;
+      font-size: 10pt; /* Base print font size */
+      line-height: 1.3;
+    }
+    :root { /* Override CSS vars for print */
+        --primary-color: #000000;
+        --accent-color: #333333;
+        --text-primary: #000000;
+        --text-secondary: #444444;
+        --bg-card: #ffffff;
+        --border-color: #cccccc;
+    }
+
+    .wheel-container, #spin-wheel-btn, .selection-buttons,
+    form, #clear-history-btn, #theme-toggle, .delete-btn, #import-users-btn,
+    #export-results-btn, .weight-control, .pointer, .stats, #timer-display { /* Hide more elements */
+      display: none !important;
+    }
+
+    .container {
+        display: block !important; /* Force block layout */
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .column {
+      width: 100%;
+      box-shadow: none !important;
+      padding: 10px !important; /* Add minimal padding */
+      margin-bottom: 0.5cm;
+      break-inside: avoid;
+      border: 1px solid #eee !important; /* Add light border for separation */
+      border-radius: 0 !important;
+      background: none !important;
+      page-break-inside: avoid; /* Try to prevent columns splitting pages */
+      transform: none !important; /* Remove hover effect */
+    }
+
+    .column::before { display: none !important; }
+    h2 {
+        font-size: 14pt !important; margin-bottom: 15px; padding-bottom: 10px;
+        text-align: left; /* Align left for print */
+        color: black !important;
+    }
+    h2::after { background: black !important; height: 1px !important; width: 50px; left: 0; transform: none;} /* Simple underline */
+
+    ul, #user-checkbox-list {
+        max-height: none !important;
+        overflow: visible !important;
+        border: 1px solid #ddd !important;
+        margin-bottom: 15px !important;
+        padding: 10px !important;
+        backdrop-filter: none !important; /* Remove blur */
+        background: none !important; /* Remove bg */
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    li, .checkbox-item {
+        border-bottom: 1px dotted #ccc !important; /* Use dotted border */
+        animation: none !important; /* Disable animation */
+        padding: 5px 10px !important;
+        page-break-inside: avoid;
+        color: black !important;
+        transform: none !important;
+        background: none !important;
+        display: block !important; /* Ensure list items print correctly */
+    }
+    li:last-child, .checkbox-item:last-child { border-bottom: none !important; }
+
+    li > div { display: none !important; } /* Hide weight/delete in print */
+    .checkbox-item input[type="checkbox"] { display: none !important; }
+    .checkbox-item label { margin-left: 0 !important; color: black !important; }
+
+    #history-list {
+         border: 1px solid #ddd !important;
+         padding: 10px !important;
+    }
+    #history-list li::before, #history-list li::after { display: none !important; }
+    #history-list li { padding: 5px 10px !important; }
+
+    .winner-announcement {
+        border: 1px solid #ddd !important; min-height: auto !important; font-size: 11pt !important;
+        padding: 8px !important; margin: 10px 0 !important;
+        color: black !important;
+        background: #eee !important;
+    }
+    .winner-highlight { background: #eee !important; color: black !important; animation: none !important; font-size: 11pt !important; box-shadow: none !important; }
+
+    .empty-list-message { padding: 10px 0 !important; color: #666 !important; }
+    [data-tooltip]:hover:after { display: none !important; } /* Hide tooltips */
+  }
+
+  /* Animation for Dark Mode Toggle (subtle background fade) */
+  .theme-transition {
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for body */
+  }
+   /* Keyframe removed - transition property on body is sufficient */
+
+  /* Visually hidden class for accessibility */
+  .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+      white-space: nowrap; /* Add this for screen reader compatibility */
+  }
